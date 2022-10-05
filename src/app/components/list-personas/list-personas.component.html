@@ -1,4 +1,18 @@
-<mat-card>
+<div *ngIf="!listado" class="container">
+  <div class="izquierda">
+<h2>Personas Listados world</h2>
+<span class="pasion">Pasion por las bases de datos</span>
+<button (click)="entrar()" mat-stroked-button color="primary">Entrar</button>
+  </div>
+<div class="derecha">
+  <img src="../../../assets/images/woman.jpg"  alt="">
+</div>
+</div>
+
+<mat-card *ngIf="listado">
+  <mat-toolbar color="primary">
+    <span>Personas</span>
+  </mat-toolbar>
     <mat-form-field appearance="standard">
         <mat-label>Filter</mat-label>
         <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
@@ -53,6 +67,6 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
       </table>
-      <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+      <mat-paginator (page)="mipagina($event)" [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
       
 </mat-card>

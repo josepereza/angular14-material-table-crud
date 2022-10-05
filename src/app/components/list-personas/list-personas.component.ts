@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Persona } from 'src/app/interfaces/persona';
@@ -75,6 +75,7 @@ var listPersonas: Persona[] = [
   styleUrls: ['./list-personas.component.css'],
 })
 export class ListPersonasComponent implements OnInit, AfterViewInit {
+  listado:boolean=false;
   dataSource: MatTableDataSource<Persona>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -89,6 +90,7 @@ export class ListPersonasComponent implements OnInit, AfterViewInit {
   ];
   constructor(public dialog: MatDialog) {
     this.dataSource = new MatTableDataSource(listPersonas);
+    
   }
 
   ngAfterViewInit() {
@@ -152,5 +154,12 @@ export class ListPersonasComponent implements OnInit, AfterViewInit {
     console.log('indice delete', indice);
     if (indice !== -1) listPersonas.splice(indice, 1);
     this.dataSource.data = listPersonas;
+  }
+  mipagina(event:PageEvent){
+    console.log(event)
+
+  }
+  entrar(){
+    this.listado=true
   }
 }
